@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import "./config-form.css";
 
 interface Props {
-  onSubmit: Function;
+  onSubmit: (formData: FormData) => void;
 }
 
 export interface FormData {
-  duration: string;
-  digits: string;
-  reps: string;
+  duration: number;
+  digits: number;
+  length: number;
 }
 
-const setValue = (cb: Function) => (
+const setValue = (cb: (value: number) => void) => (
   event: React.ChangeEvent<HTMLInputElement>
-) => cb(event.target.value);
+) => cb(Number(event.target.value));
 
 export const ConfigForm = (props: Props) => {
-  const [duration, setDuration] = useState("");
-  const [digits, setDigits] = useState("");
-  const [reps, setReps] = useState("");
+  const [duration, setDuration] = useState(3);
+  const [digits, setDigits] = useState(3);
+  const [length, setLength] = useState(3);
 
   return (
     <div className="pure-form">
@@ -45,13 +45,13 @@ export const ConfigForm = (props: Props) => {
         id="reps"
         placeholder="reps"
         type="text"
-        value={reps}
-        onChange={setValue(setReps)}
+        value={length}
+        onChange={setValue(setLength)}
       />
 
       <button
         className="pure-button pure-button-primary"
-        onClick={(): FormData => props.onSubmit({ duration, digits, reps })}
+        onClick={() => props.onSubmit({ duration, digits, length })}
       >
         Go
       </button>

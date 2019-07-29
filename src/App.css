@@ -3,3 +3,15 @@
   text-align: center;
   color: whitesmoke;
 }
+
+.test-inputs {
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  color: black;
+}
