@@ -14,7 +14,7 @@ const setValue = (cb: any, index: number) => (
 ) => {
   const value = event.target.value;
   cb((nums: number[]) => {
-    return R.adjust(index, () => (value ? Number(value) : 0), nums);
+    return R.update(index, value ? Number(value) : 0, nums);
   });
 };
 
