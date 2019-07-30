@@ -14,7 +14,7 @@ const setValue = (cb: any, index: number) => (
 ) => {
   const value = event.target.value;
   cb((nums: number[]) => {
-    return R.update(index, value ? Number(value) : 0, nums);
+    return R.update(index, Number(value), nums);
   });
 };
 
@@ -28,6 +28,7 @@ const genRandNums = (length: number, numDigits: number): number[] => {
 
 const checkAnswer = (nums: number[], inputs: number[]) => () => {
   const isCorrect: boolean = R.equals(nums, inputs);
+  console.log("nums: ", nums);
   console.log("isCorrect: ", isCorrect);
 };
 
