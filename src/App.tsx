@@ -18,21 +18,6 @@ enum Status {
   done = "done"
 }
 
-const setValue = (cb: any, index: number) => (
-  event: React.ChangeEvent<HTMLInputElement>
-) => {
-  const value = event.target.value;
-  cb((nums: number[]) => {nums[index] = Number(value); return nums});
-};
-
-const genRandNums = (length: number, numDigits: number): number[] => {
-  const min = Math.pow(10, numDigits - 1);
-  const max = min * 10 - 1;
-  const genRandNum = () => Math.floor(Math.random() * (max - min + 1)) + min;
-
-  return Array.from({ length }, genRandNum);
-};
-
 const App: React.FC = () => {
   const [nums, setNums] = useState<number[]>([]);
   const [inputNums, setInputNums] = useState<number[]>([]);
@@ -58,7 +43,6 @@ const App: React.FC = () => {
   };
 
   const checkAnswer = (nums: number[], inputs: number[]) => () => {
-    console.log("yo", nums, inputs);
     const isCorrect: boolean = R.equals(nums, inputs);
     setIsCorrectAnswer(isCorrect);
     setStatus(Status.done);
@@ -129,5 +113,23 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
+
+const setValue = (cb: any, index: number) => (
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
+  const value = event.target.value;
+  cb((nums: number[]) => {
+    nums[index] = Number(value);
+    return nums;
+  });
+};
+
+const genRandNums = (length: number, numDigits: number): number[] => {
+  const min = Math.pow(10, numDigits - 1);
+  const max = min * 10 - 1;
+  const genRandNum = () => Math.floor(Math.random() * (max - min + 1)) + min;
+
+  return Array.from({ length }, genRandNum);
+};
 
 export default App;
